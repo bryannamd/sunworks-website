@@ -6,13 +6,15 @@ export const contactFormUrl =
   'https://sunworks-formmail.quiet-poetry-c5be.workers.dev/form';
 
 // 한글 사업자등록증·영문 사업자등록증명(2026-10-08 발급) 기준.
-// 주소의 호수는 비공개. 연락처는 어흥!한자 운영 안내와 같은 주소다.
+// 주소(호수 포함)·전화·통신판매업 신고번호는 소유자가 2026-10-16 직접 알려 준 값이다.
 export const company = {
   bizNo: '463-11-02942',
   founded: '2026-06-12',
   email: 'support@sunworks.kr',
-  // 소유자가 2026-10-07 직접 알려 준 회사 전화.
-  tel: '+821051735351',
+  tel: '+827087178850',
+  mailOrderNo: '2026-서울송파-2924',
+  // 공정위 통신판매사업자 정보공개. 보안문자를 입력해야 내용이 보인다.
+  ftcUrl: 'https://www.ftc.go.kr/bizCommPop.do?wrkr_no=4631102942',
   // 국세청 홈택스 '사업자상태 조회(사업자등록번호)' 화면. 로그인 없이 조회된다.
   verifyUrl:
     'https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&tmIdx=43&tm2lIdx=4306000000&tm3lIdx=4306080000',
@@ -165,9 +167,16 @@ export const copy = {
       bizNoLabel: '사업자등록번호',
       verify: '국세청에서 확인',
       addressLabel: '주소',
-      address: '서울특별시 송파구 위례광장로 199(장지동, 성희프라자)',
+      mailOrderLabel: '통신판매업 신고번호',
+      ftcVerify: '공정위에서 확인',
+      // 덩어리마다 줄을 바꾸지 않는다. 호수의 하이픈에서 줄이 갈라지지 않게 한다.
+      address: [
+        '서울특별시 송파구',
+        '위례광장로 199,',
+        '성희프라자 501-3-10호',
+      ],
       phoneLabel: '전화',
-      phone: '010-5173-5351',
+      phone: '070-8717-8850',
       emailLabel: '이메일',
       contactLabel: '문의',
       contactCta: '의견·문의 보내기',
@@ -321,9 +330,16 @@ export const copy = {
       bizNoLabel: 'Business registration no.',
       verify: 'Verify on Korea’s Hometax',
       addressLabel: 'Address',
-      address: '199 Wiryegwangjang-ro, Songpa-gu, Seoul, Republic of Korea',
+      mailOrderLabel: 'Mail-order business report no.',
+      ftcVerify: 'Verify on Korea’s FTC',
+      address: [
+        'Unit 501-3-10,',
+        '199 Wiryegwangjang-ro,',
+        'Songpa-gu, Seoul,',
+        'Republic of Korea',
+      ],
       phoneLabel: 'Phone',
-      phone: '+82 10-5173-5351',
+      phone: '+82 70-8717-8850',
       emailLabel: 'Email',
       contactLabel: 'Contact',
       contactCta: 'Send feedback (Korean form)',

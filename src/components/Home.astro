@@ -257,9 +257,32 @@ const alternates = [
               </a>
             </dd>
           </div>
+          <div class="company-wide">
+            <dt>{t.company.mailOrderLabel}</dt>
+            <dd>
+              <span class="biz-no">{company.mailOrderNo}</span>
+              <a
+                class="company-link"
+                href={company.ftcUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                hreflang="ko"
+              >
+                {t.company.ftcVerify} <Arrow diagonal />
+                <span class="sr-only">{t.newWindow}</span>
+              </a>
+            </dd>
+          </div>
           <div class="company-address">
             <dt>{t.company.addressLabel}</dt>
-            <dd>{t.company.address}</dd>
+            <dd>
+              {t.company.address.map((part, i) => (
+                <>
+                  {i > 0 && ' '}
+                  <span>{part}</span>
+                </>
+              ))}
+            </dd>
           </div>
           <div class="company-wide">
             <dt>{t.company.emailLabel}</dt>

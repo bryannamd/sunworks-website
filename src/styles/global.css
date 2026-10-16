@@ -884,6 +884,9 @@ section[id] {
 .company-address {
   grid-column: span 2;
 }
+.company-address span {
+  white-space: nowrap;
+}
 .biz-no {
   margin-right: 14px;
   font-variant-numeric: tabular-nums;
