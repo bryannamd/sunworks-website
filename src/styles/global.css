@@ -933,6 +933,72 @@ section[id] {
   width: 16px;
   height: 16px;
 }
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.privacy {
+  width: min(760px, calc(100% - 40px));
+  margin-inline: auto;
+  padding-block: 32px 96px;
+}
+.privacy h1 {
+  margin-top: 24px;
+  font-family: var(--display);
+  font-size: clamp(36px, 6vw, 60px);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  letter-spacing: var(--display-tracking);
+  line-height: var(--display-leading);
+}
+.privacy .effective {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.privacy .intro {
+  margin-top: 32px;
+}
+.privacy section {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.privacy h2 {
+  margin-bottom: 14px;
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: var(--heading-leading);
+}
+.privacy p {
+  font-size: 16px;
+  line-height: var(--body-leading);
+}
+.privacy dl {
+  margin: 20px 0;
+  border-top: 1px solid var(--rule);
+}
+.privacy dl > div {
+  display: grid;
+  grid-template-columns: 9em minmax(0, 1fr);
+  gap: 4px 24px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.privacy dt {
+  font-size: 15px;
+  font-weight: 700;
+}
+.privacy dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: var(--body-leading);
+}
+@media (max-width: 600px) {
+  .privacy dl > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .not-found {
   min-height: 100svh;
   display: flex;

@@ -1,0 +1,21 @@
+---
+import type { Rich } from '../i18n';
+
+interface Props {
+  value: Rich;
+}
+const { value } = Astro.props;
+const parts = typeof value === 'string' ? [{ t: value }] : value;
+---
+
+{parts.map((p) =>
+  p.href ? (
+    <a href={p.href} lang={p.lang}>
+      {p.t}
+    </a>
+  ) : p.lang ? (
+    <span lang={p.lang}>{p.t}</span>
+  ) : (
+    p.t
+  ),
+)}

@@ -313,9 +313,12 @@ const alternates = [
       <div class="footer-bottom">
         <p>{t.footer.line}</p>
         <span>© {new Date().getFullYear()} SunWorks</span>
-        <a href="#top">
-          {t.footer.top} <Arrow diagonal />
-        </a>
+        <div class="footer-links">
+          <a href={t.privacy.path}>{t.footer.privacy}</a>
+          <a href="#top">
+            {t.footer.top} <Arrow diagonal />
+          </a>
+        </div>
       </div>
     </div>
   </footer>

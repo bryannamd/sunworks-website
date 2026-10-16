@@ -20,6 +20,30 @@ export const company = {
     'https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&tmIdx=43&tm2lIdx=4306000000&tm3lIdx=4306080000',
 };
 
+// 처리방침 문장 조각. href가 있으면 링크, lang이 있으면 그 언어로 표시한다.
+export interface Part {
+  t: string;
+  href?: string;
+  lang?: string;
+}
+export type Rich = string | readonly Part[];
+export interface PrivacySection {
+  title: string;
+  body?: Rich;
+  items?: readonly { dt: string; dd: Rich }[];
+  note?: Rich;
+}
+export interface PrivacyCopy {
+  path: string;
+  title: string;
+  metaTitle: string;
+  description: string;
+  homeLabel: string;
+  intro: Rich;
+  effective: string;
+  sections: readonly PrivacySection[];
+}
+
 // 줄 배열은 화면에서 줄바꿈 위치를 뜻한다. 문장은 번역하지 않고 언어마다 따로 썼다.
 export const copy = {
   ko: {
@@ -153,6 +177,7 @@ export const copy = {
     footer: {
       line: '오늘도 딴생각 중이에요.',
       top: '맨 위로',
+      privacy: '개인정보 처리방침',
     },
     company: {
       title: '회사 정보',
@@ -181,6 +206,103 @@ export const copy = {
       contactLabel: '문의',
       contactCta: '의견·문의 보내기',
       contactNotice: '입력 정보 처리 안내는 문의폼에서 확인해 주세요.',
+    },
+    privacy: {
+      path: '/privacy/',
+      title: '개인정보 처리방침',
+      metaTitle: '개인정보 처리방침 — 썬웍스 SunWorks',
+      description:
+        '썬웍스 회사 소개 사이트(www.sunworks.kr)에서 처리하는 정보를 안내합니다.',
+      homeLabel: '썬웍스 홈',
+      intro: [
+        {
+          t: '썬웍스 회사 소개 사이트(www.sunworks.kr)에서 처리하는 정보를 안내합니다. 어흥!한자 앱과 소개 사이트의 처리방침은 ',
+        },
+        { t: 'hanja.sunw.kr/privacy', href: 'https://hanja.sunw.kr/privacy' },
+        { t: '에서 확인해 주세요.' },
+      ],
+      effective: '시행일 2026년 10월 16일',
+      sections: [
+        {
+          title: '이 사이트에서 하지 않는 것',
+          body: '회원가입·로그인·결제 기능이 없습니다. 쿠키와 브라우저 저장소를 쓰지 않고, 광고 SDK와 추적 쿠키도 없습니다. 딴생각 카드 넘기기와 PNG 저장은 브라우저 안에서만 동작하며 썬웍스로 전송하지 않습니다.',
+        },
+        {
+          title: '방문 통계',
+          body: '사이트를 어떻게 이용하는지 알고 개선하기 위해 PostHog Inc.의 방문 통계 서비스(PostHog Cloud EU)를 사용합니다. 쿠키와 브라우저 저장소를 쓰지 않으며, 이름·연락처·로그인 정보처럼 사람을 알아볼 수 있는 정보를 보내지 않습니다. 같은 사람이 다른 날 다시 방문해도 서로 연결하지 않습니다.',
+          items: [
+            {
+              dt: '처리 항목',
+              dd: '본 페이지 주소, 누른 버튼·링크와 그 글자, 들어온 경로(광고 캠페인 표시 포함), 브라우저·기기 종류, 화면 크기, 페이지 로딩 속도, 방문 시각, IP 주소',
+            },
+            {
+              dt: 'IP 주소 처리',
+              dd: 'PostHog 서버가 IP 주소와 브라우저 정보에 매일 바뀌는 값을 섞어 되돌릴 수 없는 값으로 바꾼 뒤, 그날의 방문자 수를 세는 데만 씁니다. 매일 바뀌는 값은 그날 처리가 끝나면 지워지고, IP 주소로 위치를 찾지 않습니다.',
+            },
+            {
+              dt: '이전받는 자',
+              dd: [
+                { t: 'PostHog Inc. (' },
+                {
+                  t: 'privacy@posthog.com',
+                  href: 'mailto:privacy@posthog.com',
+                },
+                { t: ')' },
+              ],
+            },
+            {
+              dt: '이전 국가·방법',
+              dd: '독일(PostHog Cloud EU, 프랑크푸르트). 페이지를 열거나 누를 때 인터넷으로 전송합니다.',
+            },
+            { dt: '보유 기간', dd: '수집한 날부터 최대 1년' },
+            {
+              dt: '거부 방법',
+              dd: '브라우저의 추적 차단 기능이나 광고 차단 확장을 쓰면 통계가 전송되지 않습니다. 이때도 사이트 이용에는 제한이 없습니다.',
+            },
+          ],
+          note: [
+            {
+              t: 'PostHog 개인정보 처리방침',
+              href: 'https://posthog.com/privacy',
+              lang: 'en',
+            },
+          ],
+        },
+        {
+          title: '호스팅 과정의 접속정보',
+          body: [
+            {
+              t: '이 사이트의 파일은 Cloudflare, Inc.의 Cloudflare Pages에서 제공합니다. Cloudflare는 사이트를 전송하고 공격을 막기 위해 방문자의 IP 주소와 접속 시각, 요청한 주소 같은 요청 정보를 처리합니다. 썬웍스는 방문자별 IP 로그를 따로 수집하지 않습니다. 자세한 내용은 ',
+            },
+            {
+              t: 'Cloudflare 개인정보 처리방침',
+              href: 'https://www.cloudflare.com/privacypolicy/',
+              lang: 'en',
+            },
+            { t: '에서 확인할 수 있습니다.' },
+          ],
+        },
+        {
+          title: '문의할 때',
+          body: '의견·문의는 별도 보안 문의폼으로 받습니다. 문의폼은 Cloudflare Workers·Turnstile로 접수와 봇 확인을 처리하고, Resend와 Google Workspace로 support@sunworks.kr 메일함에 전달합니다. 입력한 정보의 처리 기준은 문의폼에서 안내합니다. 이메일을 직접 보내면 발신 주소와 이름, 본문이 전달됩니다.',
+        },
+        {
+          title: '개인정보 보호책임자',
+          body: '개인정보 처리에 관한 문의와 열람·정정·삭제 요청은 아래로 연락해 주세요.',
+          items: [
+            { dt: '성명', dd: '남선' },
+            { dt: '직책', dd: '대표' },
+            {
+              dt: '이메일',
+              dd: [{ t: company.email, href: `mailto:${company.email}` }],
+            },
+            {
+              dt: '전화',
+              dd: [{ t: '070-8717-8850', href: `tel:${company.tel}` }],
+            },
+          ],
+        },
+      ],
     },
   },
   en: {
@@ -316,6 +438,7 @@ export const copy = {
     footer: {
       line: 'Still daydreaming.',
       top: 'Back to top',
+      privacy: 'Privacy policy',
     },
     company: {
       title: 'Company information',
@@ -344,6 +467,103 @@ export const copy = {
       contactLabel: 'Contact',
       contactCta: 'Send feedback (Korean form)',
       contactNotice: 'Review how your information is handled on the form.',
+    },
+    privacy: {
+      path: '/en/privacy/',
+      title: 'Privacy policy',
+      metaTitle: 'Privacy policy — SunWorks',
+      description:
+        'This page explains what information the SunWorks company site (www.sunworks.kr) handles.',
+      homeLabel: 'SunWorks home',
+      intro: [
+        {
+          t: 'This page explains what information the SunWorks company site (www.sunworks.kr) handles. For the ',
+        },
+        { t: '어흥!한자', lang: 'ko' },
+        { t: ' app and its site, see ' },
+        { t: 'hanja.sunw.kr/privacy', href: 'https://hanja.sunw.kr/privacy' },
+        { t: '.' },
+      ],
+      effective: 'Effective October 16, 2026',
+      sections: [
+        {
+          title: 'What this site doesn’t do',
+          body: 'No accounts, sign-in, or payments. The site uses no cookies or browser storage, and has no ad SDKs or tracking cookies. Card swiping and PNG export run entirely in your browser and nothing is sent to us.',
+        },
+        {
+          title: 'Visit statistics',
+          body: 'To understand how the site is used and improve it, we use PostHog Cloud EU, a visit statistics service from PostHog Inc. It sets no cookies, uses no browser storage, and receives nothing that identifies you, such as your name, contact details, or account. Visits on different days are never linked together.',
+          items: [
+            {
+              dt: 'Data processed',
+              dd: 'page address, buttons and links you click and their text, how you arrived (including ad campaign tags), browser and device type, screen size, page load speed, time of visit, IP address',
+            },
+            {
+              dt: 'IP address handling',
+              dd: 'PostHog’s servers mix your IP address and browser details with a value that changes every day, turn the result into a one-way hash, and use it only to count that day’s visitors. The daily value is deleted once that day’s events are processed, and your IP address is not used to look up your location.',
+            },
+            {
+              dt: 'Recipient',
+              dd: [
+                { t: 'PostHog Inc. (' },
+                {
+                  t: 'privacy@posthog.com',
+                  href: 'mailto:privacy@posthog.com',
+                },
+                { t: ')' },
+              ],
+            },
+            {
+              dt: 'Location and method',
+              dd: 'Germany (PostHog Cloud EU, Frankfurt), sent over the internet when you open or click a page',
+            },
+            { dt: 'Retention', dd: 'up to 1 year from collection' },
+            {
+              dt: 'How to opt out',
+              dd: 'a browser’s tracking protection or an ad-blocking extension stops these statistics from being sent. The site works the same either way.',
+            },
+          ],
+          note: [
+            {
+              t: 'PostHog privacy policy',
+              href: 'https://posthog.com/privacy',
+            },
+          ],
+        },
+        {
+          title: 'Hosting',
+          body: [
+            {
+              t: 'The site is served by Cloudflare Pages from Cloudflare, Inc. To deliver pages and block attacks, Cloudflare processes request details such as your IP address, the time, and the address requested. We do not keep per-visitor IP logs. See ',
+            },
+            {
+              t: 'Cloudflare’s privacy policy',
+              href: 'https://www.cloudflare.com/privacypolicy/',
+            },
+            { t: ' for details.' },
+          ],
+        },
+        {
+          title: 'Contacting us',
+          body: 'Feedback and questions go through a separate secure form. The form uses Cloudflare Workers and Turnstile to receive messages and check for bots, then Resend and Google Workspace deliver them to support@sunworks.kr. The form explains how your input is handled. If you email us directly, your address, name, and message reach us.',
+        },
+        {
+          title: 'Privacy officer',
+          body: 'For questions about your information, or to see, correct, or delete it, contact:',
+          items: [
+            { dt: 'Name', dd: 'SUN NAM' },
+            { dt: 'Role', dd: 'Representative' },
+            {
+              dt: 'Email',
+              dd: [{ t: company.email, href: `mailto:${company.email}` }],
+            },
+            {
+              dt: 'Phone',
+              dd: [{ t: '+82 70-8717-8850', href: `tel:${company.tel}` }],
+            },
+          ],
+        },
+      ],
     },
   },
 } as const;

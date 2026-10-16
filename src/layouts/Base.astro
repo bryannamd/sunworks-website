@@ -56,6 +56,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
+    <script is:inline src="/analytics.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">
