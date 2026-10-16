@@ -1,6 +1,6 @@
 # sunworks 사이트 작업 지침
 
-썬웍스 회사 소개 사이트. Astro + TypeScript, GitHub Pages로 배포한다.
+썬웍스 회사 소개 사이트. Astro + TypeScript, Cloudflare Pages로 배포한다.
 
 ## 기준 문서
 
@@ -48,6 +48,6 @@
 
 ## 커밋과 배포
 
-- `main`에 푸시하면 GitHub Actions가 `npm run verify` 통과 후 바로 배포한다. PR은 검사만 한다.
+- `main`에 푸시하면 GitHub Actions가 `npm run verify` 통과 후 Cloudflare Pages에 바로 배포한다. PR은 검사만 한다.
 - 커밋과 푸시는 사용자가 요청할 때만 한다. 끝나면 "커밋할까요?"라고 묻는다.
 - 커밋 메시지는 기존 관례를 따른다: `feat:`·`fix:`·`style:`·`chore:` 등 + 영어 한 줄.

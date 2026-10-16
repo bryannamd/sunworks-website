@@ -8,7 +8,7 @@
 - 브랜드: 사용자 제공 한글 로고, 노랑–주황 그라데이션, 빈티지 인쇄풍 일러스트
 - 언어: 한국어 `/`, 영어 `/en/`. 두 언어 문구는 `src/i18n.ts`에서 관리
 - 체험: 딴생각 카드 넘기기와 1080×1350 PNG 저장 (별도 API 없음)
-- 배포: GitHub Pages, GitHub Actions
+- 배포: Cloudflare Pages, GitHub Actions
 
 ## 개발
 
@@ -28,10 +28,9 @@ npm run preview
 
 ## 배포
 
-`main`에 푸시하면 검사 통과 후 `dist/`를 GitHub Pages로 배포합니다. PR에서는 검사만 실행합니다.
-커스텀 도메인은 `astro.config.mjs`, `public/CNAME`, GitHub Pages 설정에서 관리합니다.
-
-인증서 발급 후 HTTPS를 마무리하려면 저장소 관리자 계정으로 `gh auth login`한 환경에서 `npm run launch:https`를 실행합니다. 최대 40회, 1분 간격으로 활성화를 재시도하고 TLS 및 HTTP 리디렉션을 확인합니다. 비밀키를 저장소에 추가하지 않습니다.
+`main`에 푸시하면 검사 통과 후 `wrangler pages deploy`로 `dist/`를 Cloudflare Pages(`sunworks-website` 프로젝트)에 배포합니다. PR에서는 검사만 실행합니다.
+배포에는 저장소 secret `CLOUDFLARE_API_TOKEN`(Pages 편집 권한만)과 `CLOUDFLARE_ACCOUNT_ID`가 필요합니다.
+도메인 DNS는 Cloudflare에서 관리합니다. `www.sunworks.kr`은 Pages 커스텀 도메인이고, `sunworks.kr`은 Cloudflare 리디렉트 규칙으로 `www`로 이동합니다.
 
 ## 프로젝트 문서
 
