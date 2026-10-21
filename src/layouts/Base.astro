@@ -3,7 +3,7 @@ import '@fontsource/gasoek-one';
 import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/noto-sans-kr';
 import '../styles/global.css';
-import { copy, type Lang } from '../i18n';
+import { company, copy, type Lang } from '../i18n';
 
 interface Props {
   lang?: Lang;
@@ -13,8 +13,9 @@ interface Props {
   ogImageAlt?: string;
   ogLocale?: string;
   alternates?: { hreflang: string; href: string }[];
+  noindex?: boolean;
 }
-const { lang = 'ko', alternates = [] } = Astro.props;
+const { lang = 'ko', alternates = [], noindex = false } = Astro.props;
 const meta = copy[lang].meta;
 const {
   title = meta.title,
@@ -24,6 +25,46 @@ const {
   ogLocale = meta.ogLocale,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// 검색엔진·AI가 읽는 회사 정보. 화면의 회사 정보와 같은 값만 쓰고, 그 정보가 보이는 홈에만 넣는다.
+const info = copy[lang].company;
+const orgId = new URL('/#organization', Astro.site);
+const jsonLd =
+  Astro.url.pathname === copy[lang].path &&
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': orgId,
+        name: 'SunWorks',
+        // 한글 사업자등록증 상호와 영문 사업자등록증명 상호.
+        legalName: copy.ko.company.name,
+        alternateName: copy.en.company.name,
+        url: Astro.site,
+        logo: new URL('/assets/sunworks-korean-logo.png', Astro.site),
+        email: company.email,
+        telephone: company.tel,
+        foundingDate: company.founded,
+        taxID: company.bizNo,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: info.address.join(' '),
+          addressCountry: 'KR',
+        },
+        sameAs: ['https://github.com/sunworks-dev'],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': new URL('/#website', Astro.site),
+        name: 'SunWorks',
+        alternateName: '썬웍스',
+        url: Astro.site,
+        inLanguage: ['ko', 'en'],
+        publisher: { '@id': orgId },
+      },
+    ],
+  }).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -36,7 +77,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="canonical" href={canonical} />
+    {noindex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <link rel="canonical" href={canonical} />
+    )}
     {alternates.map(({ hreflang, href }) => (
       <link
         rel="alternate"
@@ -56,6 +101,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     <script is:inline src="/analytics.js" defer></script>
   </head>
   <body>

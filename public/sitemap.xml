@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 화면 내용을 바꾸면 해당 URL의 lastmod도 함께 고친다. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.sunworks.kr/</loc></url>
-  <url><loc>https://www.sunworks.kr/en/</loc></url>
-  <url><loc>https://www.sunworks.kr/privacy/</loc></url>
-  <url><loc>https://www.sunworks.kr/en/privacy/</loc></url>
+  <url><loc>https://www.sunworks.kr/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://www.sunworks.kr/en/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://www.sunworks.kr/privacy/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://www.sunworks.kr/en/privacy/</loc><lastmod>2026-10-16</lastmod></url>
 </urlset>
